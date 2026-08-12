@@ -3,12 +3,12 @@
 build/
 !gradle/wrapper/gradle-wrapper.jar
 
-# IntelliJ
+# IntelliJ IDEA
 .idea/*
 !.idea/runConfigurations/
 *.iml
 out/
 
-# OS / env
+# OS / environment
 .DS_Store
 .env
