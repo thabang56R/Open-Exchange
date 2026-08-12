@@ -15,6 +15,7 @@ from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, Tool
 
 from tools import AGENT_TOOLS
 
+# Use the base llama3 model (≈4.7 GB) which is available in Ollama
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3")
 MAX_TOOL_STEPS = 5

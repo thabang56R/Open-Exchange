@@ -8,12 +8,12 @@ engine to read the signed-in user's wallet.
 
 ```bash
 cd analytics
-python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+py -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 export KOTLIN_API_URL=http://localhost:8080
 export OLLAMA_URL=http://localhost:11434
 export OLLAMA_MODEL=llama3
-python app.py          # http://localhost:5001
+py app.py          # http://localhost:5001
 ```
 
 ## Ollama

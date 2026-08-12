@@ -38,25 +38,52 @@ async function request(path, { method = "GET", body, headers = {} } = {}) {
 
 export const api = {
   baseUrl: API_URL,
+
+  // 🔐 Auth
   register: (username, password) =>
     request("/api/auth/register", { method: "POST", body: { username, password } }),
+
   login: (username, password) =>
     request("/api/auth/login", { method: "POST", body: { username, password } }),
+
+  me: () => request("/api/auth/me"),
+
+  // 💰 Wallet
   balances: () => request("/api/wallets/balances"),
+
   deposit: (asset, amount) =>
     request("/api/wallets/deposit", {
       method: "POST",
       body: { asset, amount },
       headers: { "Idempotency-Key": newIdempotencyKey() },
     }),
+
+  // 📈 Orders
   placeOrder: (order) =>
     request("/api/orders", {
       method: "POST",
       body: order,
       headers: { "Idempotency-Key": newIdempotencyKey() },
     }),
+
   orders: () => request("/api/orders"),
+
   cancelOrder: (id) => request(`/api/orders/${id}`, { method: "DELETE" }),
+
+  // 📊 Market Data
   book: (symbol, levels = 15) =>
     request(`/api/market/${symbol}/book?levels=${levels}`),
+
+  candles: (symbol, interval = 1, limit = 60) =>
+    request(`/api/market/${symbol}/candles?interval=${interval}&limit=${limit}`),
+
+  trades: (symbol, limit = 50) =>
+    request(`/api/market/${symbol}/trades?limit=${limit}`),
+
+  stats: (symbol) =>
+    request(`/api/market/${symbol}/stats`),
+
+  marketStatus: () =>
+    request("/api/market/status"),
 };
+

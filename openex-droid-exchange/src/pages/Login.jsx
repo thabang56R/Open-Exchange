@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { api } from "../lib/api.js";
+import { api, setToken } from "../lib/api.js";
 
-export default function Login({ onAuth }) {
+export default function Login() {
   const [mode, setMode] = useState("login");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,15 @@ export default function Login({ onAuth }) {
         mode === "login"
           ? await api.login(username, password)
           : await api.register(username, password);
-      onAuth(res.token);
+
+      // ✅ Capture token regardless of backend field name
+      const token = res.token || res.accessToken || res.jwt;
+      if (token) {
+        setToken(token); // persist token in localStorage
+        window.location.href = "/terminal"; // redirect to dashboard
+      } else {
+        throw new Error("No token returned from server");
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -46,7 +54,11 @@ export default function Login({ onAuth }) {
                 type="button"
                 onClick={() => setMode(m)}
                 className="btn flex-1"
-                style={m === mode ? { borderColor: "var(--color-amber)", color: "var(--color-amber)" } : undefined}
+                style={
+                  m === mode
+                    ? { borderColor: "var(--color-amber)", color: "var(--color-amber)" }
+                    : undefined
+                }
               >
                 {m}
               </button>
@@ -90,3 +102,7 @@ export default function Login({ onAuth }) {
     </main>
   );
 }
+
+
+
+
