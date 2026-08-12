@@ -68,7 +68,11 @@ def summary():
 
 @app.post("/api/chat")
 def chat():
-    payload = request.get_json(silent=True) or {}
+    # Force JSON parsing so headers don’t break it
+    payload = request.get_json(force=True, silent=True) or {}
+    log.info("RAW DATA: %s", request.data.decode("utf-8", errors="ignore"))
+    log.info("PARSED JSON: %s", payload)
+
     message = (payload.get("message") or "").strip()
     if not message:
         return jsonify({"error": "empty_message", "message": "Send a non-empty 'message'."}), 400
@@ -85,7 +89,7 @@ def chat():
                 {
                     "error": "agent_unavailable",
                     "message": f"The local model could not be reached ({exc}). "
-                    f"Start Ollama and run: ollama pull {OLLAMA_MODEL}",
+                               f"Start Ollama and run: ollama pull {OLLAMA_MODEL}",
                 }
             ),
             503,
