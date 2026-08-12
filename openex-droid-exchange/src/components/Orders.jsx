@@ -1,19 +1,23 @@
 import { api } from "../lib/api.js";
 
-const statusColor = {
+const STATUS_COLOR = {
   OPEN: "var(--color-amber)",
   PARTIALLY_FILLED: "var(--color-amber)",
   FILLED: "var(--color-bid)",
   CANCELLED: "var(--color-muted)",
 };
 
+/**
+ * Orders component
+ * Renders the user's active and historical orders with cancel functionality.
+ */
 export default function Orders({ orders, onChange }) {
-  const cancel = async (id) => {
+  const cancelOrder = async (id) => {
     try {
       await api.cancelOrder(id);
       onChange?.();
-    } catch (_) {
-      /* surfaced by refresh */
+    } catch {
+      // Errors surfaced by refresh
     }
   };
 
@@ -35,27 +39,46 @@ export default function Orders({ orders, onChange }) {
             </tr>
           </thead>
           <tbody>
-            {orders.length === 0 ? (
+            {orders.length === 0 && (
               <tr>
                 <td colSpan={7} className="py-3 text-muted">
                   No orders routed yet.
                 </td>
               </tr>
-            ) : null}
-            {orders.map((o) => (
-              <tr key={o.id} className="border-t border-edge">
-                <td className="py-2">{o.symbol}</td>
-                <td style={{ color: o.side === "BUY" ? "var(--color-bid)" : "var(--color-ask)" }}>{o.side}</td>
-                <td>{o.price ?? "MKT"}</td>
-                <td>{o.quantity}</td>
-                <td>{o.filledQuantity}</td>
-                <td style={{ color: statusColor[o.status] || "var(--color-ink)" }}>{o.status}</td>
+            )}
+
+            {orders.map((order) => (
+              <tr key={order.id} className="border-t border-edge">
+                <td className="py-2">{order.symbol}</td>
+                <td
+                  style={{
+                    color:
+                      order.side === "BUY"
+                        ? "var(--color-bid)"
+                        : "var(--color-ask)",
+                  }}
+                >
+                  {order.side}
+                </td>
+                <td>{order.price ?? "MKT"}</td>
+                <td>{order.quantity}</td>
+                <td>{order.filledQuantity}</td>
+                <td
+                  style={{
+                    color: STATUS_COLOR[order.status] || "var(--color-ink)",
+                  }}
+                >
+                  {order.status}
+                </td>
                 <td className="text-right">
-                  {o.status === "OPEN" || o.status === "PARTIALLY_FILLED" ? (
-                    <button className="btn !py-1 !px-2" onClick={() => cancel(o.id)}>
+                  {["OPEN", "PARTIALLY_FILLED"].includes(order.status) && (
+                    <button
+                      className="btn !py-1 !px-2"
+                      onClick={() => cancelOrder(order.id)}
+                    >
                       Cancel
                     </button>
-                  ) : null}
+                  )}
                 </td>
               </tr>
             ))}
