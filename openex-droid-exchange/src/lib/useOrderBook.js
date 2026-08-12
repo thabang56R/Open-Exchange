@@ -7,31 +7,37 @@ const WS_URL =
   api.baseUrl.replace(/^http/, "ws") + "/ws";
 
 /**
- * Subscribes to /topic/orderbook/{symbol} over STOMP and falls back to REST
- * polling whenever the socket is unavailable.
+ * Hook: useOrderBook
+ * Subscribes to /topic/orderbook/{symbol} via STOMP WebSockets.
+ * Falls back to REST polling whenever the socket is unavailable.
  */
 export function useOrderBook(symbol) {
   const [book, setBook] = useState({ symbol, bids: [], asks: [] });
   const [connected, setConnected] = useState(false);
+
+  // Keep latest symbol reference for subscription
   const symbolRef = useRef(symbol);
   symbolRef.current = symbol;
 
   useEffect(() => {
     let cancelled = false;
 
-    const pull = () =>
-      api
-        .book(symbol)
-        .then((data) => {
-          if (!cancelled) setBook(data);
-        })
-        .catch(() => {});
+    const pull = async () => {
+      try {
+        const data = await api.book(symbol);
+        if (!cancelled) setBook(data);
+      } catch {
+        // ignore polling errors
+      }
+    };
 
+    // Initial fetch + polling fallback
     pull();
     const poll = setInterval(() => {
       if (!cancelled) pull();
     }, 4000);
 
+    // STOMP client setup
     const client = new Client({
       brokerURL: WS_URL,
       reconnectDelay: 3000,
@@ -39,9 +45,10 @@ export function useOrderBook(symbol) {
         setConnected(true);
         client.subscribe(`/topic/orderbook/${symbol}`, (frame) => {
           try {
-            setBook(JSON.parse(frame.body));
-          } catch (_) {
-            /* ignore malformed frame */
+            const payload = JSON.parse(frame.body);
+            setBook(payload);
+          } catch {
+            // ignore malformed frames
           }
         });
       },
@@ -60,3 +67,4 @@ export function useOrderBook(symbol) {
 
   return { book, connected };
 }
+
