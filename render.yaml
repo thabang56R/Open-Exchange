@@ -1,0 +1,63 @@
+services:
+  # 🧮 Flask Analytics & AI service
+  - type: web
+    name: openex-analytics
+    env: python
+    plan: starter
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
+    envVars:
+      - key: KOTLIN_API_URL
+        value: https://openex-kotlin.onrender.com
+      - key: OLLAMA_URL
+        value: http://localhost:11434
+      - key: OLLAMA_MODEL
+        value: llama3.1:8b
+    autoDeploy: true
+    healthCheckPath: /health
+
+  # ⚙️ Kotlin Engine (wallets, orders, market API)
+  - type: web
+    name: openex-kotlin
+    env: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DB_URL
+        value: ${databases.openex-db.connectionString}
+      - key: DB_USER
+        value: ${databases.openex-db.user}
+      - key: DB_PASSWORD
+        value: ${databases.openex-db.password}
+      - key: REDIS_HOST
+        value: ${databases.openex-redis.host}
+      - key: REDIS_PORT
+        value: ${databases.openex-redis.port}
+    autoDeploy: true
+    healthCheckPath: /api/health
+
+  # 🌐 React Frontend
+  - type: web
+    name: openex-frontend
+    env: node
+    plan: starter
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm run preview"
+    envVars:
+      - key: VITE_API_URL
+        value: https://openex-kotlin.onrender.com
+      - key: VITE_ANALYTICS_URL
+        value: https://openex-analytics.onrender.com
+    autoDeploy: true
+    healthCheckPath: /
+
+databases:
+  # 📦 Postgres Database
+  - name: openex-db
+    plan: starter
+    databaseName: openex
+    user: openex_user
+
+  # ⚡ Redis Cache
+  - name: openex-redis
+    plan: starter

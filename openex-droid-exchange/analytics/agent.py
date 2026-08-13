@@ -15,9 +15,9 @@ from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, Tool
 
 from tools import AGENT_TOOLS
 
-# Use the llama3:8b model (≈4.7 GB) which supports tool binding
+# Use the llama3.1:8b model (≈4.7 GB) which supports tool binding
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
-OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3:8b")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.1:8b")
 MAX_TOOL_STEPS = 5
 
 SYSTEM_PROMPT = """You are ATLAS, the in-terminal trading assistant for OpenEx 3.0,
