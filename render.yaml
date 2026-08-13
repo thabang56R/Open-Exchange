@@ -22,8 +22,6 @@ services:
     env: docker
     plan: starter
     dockerfilePath: ./Dockerfile
-    buildCommand: "./gradlew build"
-    startCommand: "java -jar build/libs/openex-kotlin.jar"
     envVars:
       - key: DB_URL
         value: ${databases.openex-db.connectionString}
