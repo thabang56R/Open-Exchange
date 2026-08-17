@@ -66,6 +66,8 @@ cd analytics
 pip install -r requirements.txt
 py app.py
 
+---
+
 ## 5.🐳 Docker Orchestration
 
 docker-compose up --build
@@ -89,19 +91,29 @@ Python .env
 
 OLLAMA_MODEL=llama3
 
+---
+
 6. 🧪 Testing
+
+---
 
 🛠️ Backend Unit Tests
 
 ./gradlew test
 
+---
+
 🔄 Integration Tests
 
 ./gradlew integrationTest
 
+---
+
 ⚛️ Frontend Tests
 
 npm run test
+
+---
 
 7. 📊 Monitoring & Logs
 
@@ -115,6 +127,8 @@ Python service logs
 
 docker logs analytics
 
+---
+
 8. 🛠️ Troubleshooting
 
 ⚠️ Database not ready → Ensure healthcheck waits for Postgres.
@@ -123,6 +137,8 @@ docker logs analytics
 
 🤖 AI not responding → Confirm Ollama model is installed locally.
 
+---
+
 9. 🤝 Contribution Guidelines
 
 Fork repo → Create feature branch → Submit PR.
@@ -130,6 +146,8 @@ Fork repo → Create feature branch → Submit PR.
 Ensure CI/CD passes before requesting review.
 
 Use descriptive commit messages.
+
+---
 
 10. 📜 License
 
