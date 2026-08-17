@@ -153,7 +153,3 @@ Use descriptive commit messages.
 
 MIT License – free to use and modify.
 
-
-This version uses **badges/stickers** for status and stack, plus **professional emojis** to highlight each section (deployment 🚀, testing 🧪, troubleshooting 🛠️, etc.). It’s visually engaging, easy to scan, and polished for a capstone project.  
-
-Would you like me to also add a **diagram-style architecture section** (with emojis for each service: 🟠 Kotlin backend, 🟦 Postgres DB, ⚛️ React frontend, 🐍 Python AI) so the README communicates the system flow at a glance?
