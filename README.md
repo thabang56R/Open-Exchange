@@ -89,7 +89,7 @@ Python .env
 
 OLLAMA_MODEL=llama3
 
-## 6. 🧪 Testing
+6. 🧪 Testing
 
 🛠️ Backend Unit Tests
 
@@ -103,7 +103,7 @@ OLLAMA_MODEL=llama3
 
 npm run test
 
-## 7. 📊 Monitoring & Logs
+7. 📊 Monitoring & Logs
 
 Backend logs:
 
@@ -115,7 +115,7 @@ Python service logs
 
 docker logs analytics
 
-## 8. 🛠️ Troubleshooting
+8. 🛠️ Troubleshooting
 
 ⚠️ Database not ready → Ensure healthcheck waits for Postgres.
 
@@ -123,7 +123,7 @@ docker logs analytics
 
 🤖 AI not responding → Confirm Ollama model is installed locally.
 
-## 9. 🤝 Contribution Guidelines
+9. 🤝 Contribution Guidelines
 
 Fork repo → Create feature branch → Submit PR.
 
@@ -131,7 +131,7 @@ Ensure CI/CD passes before requesting review.
 
 Use descriptive commit messages.
 
-## 10. 📜 License
+10. 📜 License
 
 MIT License – free to use and modify.
 
