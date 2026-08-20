@@ -1,5 +1,6 @@
 # 📘 OpenEx 3.0 – Simulated Crypto Exchange & AI Trading Terminal
 
+![CI](https://github.com/thabang56R/Open-Exchange/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Version](https://img.shields.io/badge/version-3.0-blue?style=for-the-badge)
 ![Docker Ready](https://img.shields.io/badge/docker-ready-blue?style=for-the-badge)
