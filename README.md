@@ -11,6 +11,11 @@
 
 ---
 
+DEMO VIDEO:
+
+
+---
+
 ## 1. 📌 Overview
 OpenEx 3.0 is a lightweight crypto exchange simulation built with a fully open-source microservices architecture. It emphasizes **resilience**, **financial integrity**, **real-time streaming**, and **agentic AI integration**. This README serves as a runbook for deploying, configuring, and testing the system.
 
