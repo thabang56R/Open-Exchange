@@ -65,6 +65,14 @@ cd analytics
 pip install -r requirements.txt
 py app.py
 
+```bash
+---
+
+# DEMO VIDEO
+https://capeitinitiative.sharepoint.com/:v:/s/EndtoEndTechnologies-SoftwareDev/IQD-Qu_jfJrRSJTO2PINApeCAQF5RtD8ztG7-fWmNvq_hV4?e=aDdwVc
+
+
+
 ---
 
 ## 5.🐳 Docker Orchestration
