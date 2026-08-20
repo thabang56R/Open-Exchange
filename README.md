@@ -1,14 +1,13 @@
 # 📘 OpenEx 3.0 – Simulated Crypto Exchange & AI Trading Terminal
 
-![CI](https://github.com/thabang56R/Open-Exchange/actions/workflows/ci.yml/badge.svg?branch=sprint-history)
-![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
-![Version](https://img.shields.io/badge/version-3.0-blue?style=for-the-badge)
-![Docker Ready](https://img.shields.io/badge/docker-ready-blue?style=for-the-badge)
 ![Made With Kotlin](https://img.shields.io/badge/made%20with-Kotlin-orange?style=for-the-badge)
 ![Frontend React](https://img.shields.io/badge/frontend-React-61DAFB?style=for-the-badge)
 ![Backend Spring Boot](https://img.shields.io/badge/backend-SpringBoot-6DB33F?style=for-the-badge)
 ![Database PostgreSQL](https://img.shields.io/badge/database-PostgreSQL-336791?style=for-the-badge)
 ![AI Ollama](https://img.shields.io/badge/AI-Ollama-9cf?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-3.0-blue?style=for-the-badge)
+![Docker Ready](https://img.shields.io/badge/docker-ready-blue?style=for-the-badge)
 
 ---
 
