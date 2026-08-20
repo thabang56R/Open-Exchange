@@ -2,9 +2,9 @@ name: OpenEx CI
 
 on:
   pull_request:
-    branches: [main, "week-1/**"]
+    branches: [main, "sprint-history"]
   push:
-    branches: [main, "week-1/**"]
+    branches: [main, "sprint-history"]
 
 jobs:
   build-and-test:
